@@ -11,11 +11,16 @@
 ## 快速开始
 
 ```bash
-# 一行命令，零配置
+# 单个文件
 npx aicode2flow ./src/main.go
+
+# 扫描整个项目
+npx aicode2flow ./src/
 ```
 
 把输出的 Mermaid 粘贴到 GitHub Markdown 的 ` ```mermaid ` 代码块中，GitHub 会自动渲染。
+
+> 查看完整使用手册：[USAGE_CN.md](USAGE_CN.md)
 
 ---
 
@@ -86,6 +91,12 @@ flowchart TD
 # 基础用法 — 输出 Mermaid 到终端
 npx aicode2flow ./src/main.go
 
+# 扫描整个项目（自动识别所有支持的文件）
+npx aicode2flow ./
+
+# 扫描项目，只分析 Go 文件
+npx aicode2flow ./ --language go
+
 # 保存到文件
 npx aicode2flow ./app.py -o flowchart.mmd
 
@@ -101,6 +112,9 @@ npx aicode2flow ./index.js --format png -o diagram.png
 
 # 从左到右布局
 npx aicode2flow ./main.go --direction LR
+
+# 排除测试文件
+npx aicode2flow ./ --exclude "_test|_spec"
 
 # 强制指定语言
 npx aicode2flow ./app.py -l go

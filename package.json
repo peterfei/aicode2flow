@@ -22,7 +22,12 @@
   "files": [
     "dist",
     "config",
-    "queries"
+    "queries",
+    "README.md",
+    "README_EN.md",
+    "USAGE.md",
+    "USAGE_CN.md",
+    "LICENSE.md"
   ],
   "engines": {
     "node": ">=18"

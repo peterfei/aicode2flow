@@ -11,11 +11,16 @@
 ## Quick Start
 
 ```bash
-# One command, zero setup
+# Single file
 npx aicode2flow ./src/main.go
+
+# Scan entire project directory
+npx aicode2flow ./src/
 ```
 
 Paste the output into any GitHub Markdown file inside a ` ```mermaid ` block. GitHub renders it automatically.
+
+> Full usage guide: [USAGE.md](USAGE.md)
 
 ---
 
@@ -113,6 +118,12 @@ flowchart TD
 # Basic — output Mermaid to stdout
 npx aicode2flow ./src/main.go
 
+# Scan entire project (auto-detect all supported files)
+npx aicode2flow ./
+
+# Scan project, only analyze Go files
+npx aicode2flow ./ --language go
+
 # Save to file
 npx aicode2flow ./app.py -o flowchart.mmd
 
@@ -128,6 +139,9 @@ npx aicode2flow ./index.js --format png -o diagram.png
 
 # Left-to-right layout
 npx aicode2flow ./main.go --direction LR
+
+# Exclude test files
+npx aicode2flow ./ --exclude "_test|_spec"
 
 # Force a specific language
 npx aicode2flow ./app.py -l go

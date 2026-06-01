@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFileSync, writeFileSync, existsSync, statSync, mkdtempSync, rmSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, statSync, mkdtempSync, rmSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { Command } from 'commander';
@@ -8,10 +8,12 @@ import { Registry } from './engine/registry.js';
 import { Analyzer } from './engine/analyzer.js';
 import { generateFlowchart } from './engine/template.js';
 import { FLAGS } from './cli-flags.js';
-import type { LanguageName } from './types.js';
+import type { LanguageName, LanguageConfig, AnalysisResult, AnalyzedNode } from './types.js';
 
 const program = new Command();
 const registry = new Registry();
+
+const DEFAULT_IGNORE_DIRS = new Set(['node_modules', '.git', '.next', '.svn', '.hg', 'dist', 'build', 'target', '__pycache__', '.venv']);
 
 // Build commander from declarative FLAGS
 program
@@ -25,6 +27,82 @@ for (const [key, def] of Object.entries(FLAGS)) {
   const opt = def.alias ? `-${def.alias}, --${key}` : `--${key}`;
   const typeHint = def.type === 'string' ? ' <path>' : '';
   program.option(`${opt}${typeHint}`, def.desc, def.default);
+}
+
+/** Recursively walk a directory and collect supported source files */
+function scanFiles(
+  dir: string,
+  registry: Registry,
+  excludePattern?: string,
+  langFilter?: LanguageConfig
+): { path: string; config: LanguageConfig }[] {
+  const results: { path: string; config: LanguageConfig }[] = [];
+  const exclude = excludePattern ? new RegExp(excludePattern) : null;
+
+  function walk(current: string) {
+    let entries;
+    try { entries = readdirSync(current, { withFileTypes: true }); } catch { return; }
+    for (const entry of entries) {
+      const fullPath = join(current, entry.name);
+      if (exclude?.test(fullPath) || entry.name.startsWith('.')) continue;
+
+      if (entry.isDirectory()) {
+        if (DEFAULT_IGNORE_DIRS.has(entry.name)) continue;
+        walk(fullPath);
+      } else if (entry.isFile()) {
+        const config = registry.detect(fullPath);
+        if (config && (!langFilter || config.name === langFilter.name)) {
+          results.push({ path: fullPath, config });
+        }
+      }
+    }
+  }
+
+  walk(dir);
+  return results;
+}
+
+function sanitizeId(name: string): string {
+  return name.replace(/[^a-zA-Z0-9_]/g, '_').replace(/^(\d)/, '_$1');
+}
+
+/** Merge multiple AnalysisResults into one (dedup nodes, cross-file edges) */
+function mergeResults(results: AnalysisResult[]): AnalysisResult {
+  const allNodes = new Map<string, AnalyzedNode>();
+  const errors: string[] = [];
+
+  for (const r of results) {
+    errors.push(...r.errors);
+    for (const n of r.nodes) {
+      if (allNodes.has(n.id)) {
+        const existing = allNodes.get(n.id)!;
+        for (const c of n.calls) {
+          if (!existing.calls.includes(c)) existing.calls.push(c);
+        }
+      } else {
+        allNodes.set(n.id, { ...n, calls: [...n.calls] });
+      }
+    }
+  }
+
+  const knownIds = new Set(allNodes.keys());
+  const edges: { from: string; to: string }[] = [];
+  for (const n of allNodes.values()) {
+    for (const callee of n.calls) {
+      const calleeId = sanitizeId(callee);
+      if (knownIds.has(calleeId)) {
+        edges.push({ from: n.id, to: calleeId });
+      }
+    }
+  }
+
+  const nodes = [...allNodes.values()].sort((a, b) => {
+    if (a.isEntry && !b.isEntry) return -1;
+    if (!a.isEntry && b.isEntry) return 1;
+    return a.name.localeCompare(b.name);
+  });
+
+  return { nodes, edges, errors };
 }
 
 async function renderImage(mermaid: string, outputPath: string, format: string): Promise<void> {
@@ -47,6 +125,17 @@ async function renderImage(mermaid: string, outputPath: string, format: string):
   }
 }
 
+async function analyzeFile(filePath: string, config: LanguageConfig): Promise<AnalysisResult> {
+  let source: string;
+  try {
+    source = readFileSync(filePath, 'utf-8');
+  } catch (e: any) {
+    return { nodes: [], edges: [], errors: [`${filePath}: ${e.message}`] };
+  }
+  const analyzer = new Analyzer(config);
+  return analyzer.analyze(source);
+}
+
 async function main(path: string, options: Record<string, any>) {
   const fullPath = resolve(path);
 
@@ -55,49 +144,65 @@ async function main(path: string, options: Record<string, any>) {
     process.exit(1);
   }
 
-  const stat = statSync(fullPath);
-  const isDir = stat.isDirectory();
+  const isDir = statSync(fullPath).isDirectory();
+  let results: AnalysisResult[];
 
-  // Determine language config
-  let config;
-  if (options.language) {
-    config = registry.get(options.language as LanguageName);
-    if (!config) {
-      console.error(chalk.red(`✖ Unsupported language: ${options.language}. Supported: ${registry.languages().join(', ')}`));
-      process.exit(1);
+  if (isDir) {
+    // Directory mode — scan and analyze all supported files
+    let langFilter: LanguageConfig | undefined;
+    if (options.language) {
+      langFilter = registry.get(options.language as LanguageName);
+      if (!langFilter) {
+        console.error(chalk.red(`✖ Unsupported language: ${options.language}. Supported: ${registry.languages().join(', ')}`));
+        process.exit(1);
+      }
     }
-  } else if (isDir) {
-    console.error(chalk.red('✖ Directory analysis not yet supported. Please specify a file.'));
-    process.exit(1);
+
+    const files = scanFiles(fullPath, registry, options.exclude, langFilter);
+    if (files.length === 0) {
+      console.error(chalk.yellow('⚠ No supported source files found in the directory.'));
+      process.exit(0);
+    }
+
+    console.log(chalk.dim(`🔍 Scanning ${files.length} file(s)...`));
+
+    results = [];
+    let totalErrors = 0;
+    for (const f of files) {
+      const r = await analyzeFile(f.path, f.config);
+      results.push(r);
+      totalErrors += r.errors.length;
+    }
+
+    if (totalErrors > 0) {
+      console.error(chalk.yellow(`⚠ ${totalErrors} warning(s) during analysis`));
+    }
+
+    results = [mergeResults(results)];
   } else {
-    config = registry.detect(fullPath);
+    // Single file mode
+    const config = options.language
+      ? registry.get(options.language as LanguageName)
+      : registry.detect(fullPath);
+
     if (!config) {
-      console.error(chalk.red(`✖ Unsupported file type. Supported: ${registry.languages().join(', ')}`));
+      const msg = options.language
+        ? `✖ Unsupported language: ${options.language}. Supported: ${registry.languages().join(', ')}`
+        : `✖ Unsupported file type. Supported: ${registry.languages().join(', ')}`;
+      console.error(chalk.red(msg));
       process.exit(1);
     }
+
+    results = [await analyzeFile(fullPath, config)];
   }
 
-  // Read source
-  let source: string;
-  try {
-    source = readFileSync(fullPath, 'utf-8');
-  } catch (e: any) {
-    console.error(chalk.red(`✖ Failed to read file: ${e.message}`));
-    process.exit(1);
-  }
-
-  // Analyze
-  const analyzer = new Analyzer(config);
-  const result = analyzer.analyze(source);
-
-  if (result.errors.length > 0) {
-    for (const err of result.errors) {
-      console.error(chalk.yellow(`⚠ ${err}`));
-    }
+  const result = results[0];
+  for (const err of result.errors) {
+    console.error(chalk.yellow(`⚠ ${err}`));
   }
 
   if (result.nodes.length === 0) {
-    console.error(chalk.yellow('⚠ No functions found in the file.'));
+    console.error(chalk.yellow('⚠ No functions found.'));
     process.exit(0);
   }
 
@@ -109,13 +214,11 @@ async function main(path: string, options: Record<string, any>) {
   const outPath = options.output ? resolve(options.output) : null;
   let format = options.format ?? 'mermaid';
 
-  // Auto-detect format from output file extension
   if (outPath) {
     const ext = outPath.endsWith('.svg') ? 'svg' : outPath.endsWith('.png') ? 'png' : null;
     if (ext) format = ext;
   }
 
-  // Render based on format
   if (format === 'svg' || format === 'png') {
     if (!outPath) {
       console.error(chalk.red('✖ --output path is required for SVG/PNG output'));
@@ -123,7 +226,6 @@ async function main(path: string, options: Record<string, any>) {
     }
     await renderImage(mermaid, outPath, format);
   } else {
-    // Mermaid text output
     if (outPath) {
       const content = outPath.endsWith('.md') ? markdown : mermaid;
       writeFileSync(outPath, content, 'utf-8');
@@ -136,7 +238,6 @@ async function main(path: string, options: Record<string, any>) {
     }
   }
 
-  // Summary
   console.log(chalk.dim(`📦 ${result.nodes.length} nodes, ${result.edges.length} edges`));
 }
 
