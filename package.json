@@ -1,6 +1,6 @@
 {
   "name": "aicode2flow",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "AI-powered code to Mermaid flowchart — 代码一键生成流程图",
   "keywords": [
     "mermaid",
