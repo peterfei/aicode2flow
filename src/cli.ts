@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { readFileSync, writeFileSync, existsSync, statSync, mkdtempSync, rmSync } from 'node:fs';
+import { resolve, join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { Command } from 'commander';
 import chalk from 'chalk';
 import { Registry } from './engine/registry.js';
@@ -26,7 +27,27 @@ for (const [key, def] of Object.entries(FLAGS)) {
   program.option(`${opt}${typeHint}`, def.desc, def.default);
 }
 
-program.action((path: string, options: Record<string, any>) => {
+async function renderImage(mermaid: string, outputPath: string, format: string): Promise<void> {
+  const tmpDir = mkdtempSync(join(tmpdir(), 'aicode2flow-'));
+  const mmdPath = join(tmpDir, 'diagram.mmd');
+  try {
+    writeFileSync(mmdPath, mermaid, 'utf-8');
+    const { run } = await import('@mermaid-js/mermaid-cli');
+    await run(mmdPath, outputPath, {
+      outputFormat: format as 'svg' | 'png',
+      quiet: true,
+    });
+    console.log(chalk.green(`✓ Flowchart rendered to ${outputPath}`));
+  } catch (e: any) {
+    console.error(chalk.red(`✖ Failed to render ${format.toUpperCase()}: ${e.message}`));
+    console.error(chalk.yellow('Tip: Try installing puppeteer: npm install puppeteer --save-optional'));
+    process.exit(1);
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+}
+
+async function main(path: string, options: Record<string, any>) {
   const fullPath = resolve(path);
 
   if (!existsSync(fullPath)) {
@@ -84,22 +105,46 @@ program.action((path: string, options: Record<string, any>) => {
   const mermaid = generateFlowchart(result.nodes, result.edges, options.direction ?? 'TD');
   const markdown = `\`\`\`mermaid\n${mermaid}\n\`\`\``;
 
-  // Output
-  if (options.output) {
-    const outPath = resolve(options.output);
-    const content = outPath.endsWith('.md') ? markdown : mermaid;
-    writeFileSync(outPath, content, 'utf-8');
-    console.log(chalk.green(`✓ Flowchart written to ${outPath}`));
+  // Determine output format
+  const outPath = options.output ? resolve(options.output) : null;
+  let format = options.format ?? 'mermaid';
+
+  // Auto-detect format from output file extension
+  if (outPath) {
+    const ext = outPath.endsWith('.svg') ? 'svg' : outPath.endsWith('.png') ? 'png' : null;
+    if (ext) format = ext;
+  }
+
+  // Render based on format
+  if (format === 'svg' || format === 'png') {
+    if (!outPath) {
+      console.error(chalk.red('✖ --output path is required for SVG/PNG output'));
+      process.exit(1);
+    }
+    await renderImage(mermaid, outPath, format);
   } else {
-    // Print to stdout
-    console.log('\n' + chalk.bold('📊 Generated Flowchart'));
-    console.log(chalk.dim('─'.repeat(50)));
-    console.log('\n' + mermaid);
-    console.log('\n' + chalk.dim('Copy the above output into a ```mermaid code block in GitHub Markdown.') + '\n');
+    // Mermaid text output
+    if (outPath) {
+      const content = outPath.endsWith('.md') ? markdown : mermaid;
+      writeFileSync(outPath, content, 'utf-8');
+      console.log(chalk.green(`✓ Flowchart written to ${outPath}`));
+    } else {
+      console.log('\n' + chalk.bold('📊 Generated Flowchart'));
+      console.log(chalk.dim('─'.repeat(50)));
+      console.log('\n' + mermaid);
+      console.log('\n' + chalk.dim('Copy the above output into a ```mermaid code block in GitHub Markdown.') + '\n');
+    }
   }
 
   // Summary
   console.log(chalk.dim(`📦 ${result.nodes.length} nodes, ${result.edges.length} edges`));
+}
+
+program.action((path: string, options: Record<string, any>) => {
+  main(path, options).catch((e) => {
+    console.error(chalk.red(`✖ Unexpected error: ${e.message}`));
+    process.exit(1);
+  });
 });
 
 program.parse(process.argv);

@@ -1,0 +1,77 @@
+name: 'aicode2flow Action'
+description: 'Generate Mermaid flowchart from source code and comment on PR'
+author: 'peterfei'
+branding:
+  icon: 'git-commit'
+  color: 'blue'
+inputs:
+  path:
+    description: 'Path to source code file'
+    required: true
+  direction:
+    description: 'Flow direction: TD (top-down) / LR (left-right)'
+    required: false
+    default: 'TD'
+  github-token:
+    description: 'GitHub token for PR comment'
+    required: false
+    default: ${{ github.token }}
+outputs:
+  flowchart-path:
+    description: 'Path to generated flowchart file'
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Generate flowchart
+      id: flow
+      shell: bash
+      run: |
+        OUTPUT="flowchart.mmd"
+        npx aicode2flow "${{ inputs.path }}" --direction "${{ inputs.direction }}" -o "$OUTPUT"
+        echo "path=$OUTPUT" >> "$GITHUB_OUTPUT"
+
+    - name: Read flowchart content
+      id: read
+      shell: bash
+      run: |
+        if [ -f flowchart.mmd ]; then
+          {
+            echo 'mermaid<<MERMAID_EOF'
+            cat flowchart.mmd
+            echo 'MERMAID_EOF'
+          } >> "$GITHUB_OUTPUT"
+        fi
+
+    - name: Comment on PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          const fs = require('fs');
+          const path = require('path');
+          const mmdPath = path.join(process.env.GITHUB_WORKSPACE || '.', 'flowchart.mmd');
+
+          let body = '## 📊 aicode2flow Flowchart';
+
+          if (fs.existsSync(mmdPath)) {
+            const mermaid = fs.readFileSync(mmdPath, 'utf-8');
+            body += '\n\n```mermaid\n' + mermaid + '\n```';
+          } else {
+            body += '\n\n⚠️ No flowchart generated.';
+          }
+
+          const pr = context.payload.pull_request;
+          if (pr) {
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              body: body,
+            });
+          }

@@ -28,7 +28,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "tsup src/cli.ts --format esm --target node18 --out-dir dist --clean",
+    "build": "tsup src/cli.ts --format esm --target node18 --out-dir dist --clean --external @mermaid-js/mermaid-cli --external puppeteer",
     "dev": "tsup src/cli.ts --format esm --target node18 --out-dir dist --watch",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -51,5 +51,8 @@
     "tsup": "^8.0.0",
     "typescript": "^5.5.0",
     "vitest": "^2.0.0"
+  },
+  "optionalDependencies": {
+    "@mermaid-js/mermaid-cli": "^11.15.0"
   }
 }
