@@ -1,0 +1,13 @@
+{
+  "name": "go",
+  "extensions": [".go"],
+  "grammar": "tree-sitter-go",
+  "entryPoints": [{ "pattern": "main", "match": "full" }],
+  "nodeTypes": {
+    "function": { "query": "function", "shape": "round" },
+    "method": { "query": "method", "shape": "round" },
+    "condition": { "query": "condition", "shape": "diamond" },
+    "loop": { "query": "loop", "shape": "hex" },
+    "entry": { "query": "entry", "shape": "stadium" }
+  }
+}

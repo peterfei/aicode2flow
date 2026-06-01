@@ -1,0 +1,14 @@
+{
+  "name": "typescript",
+  "extensions": [".ts"],
+  "grammar": "tree-sitter-typescript/typescript",
+  "entryPoints": [{ "pattern": "main", "match": "full" }],
+  "nodeTypes": {
+    "function": { "query": "function", "shape": "round" },
+    "method": { "query": "method", "shape": "round" },
+    "arrow": { "query": "arrow", "shape": "round" },
+    "condition": { "query": "condition", "shape": "diamond" },
+    "loop": { "query": "loop", "shape": "hex" },
+    "entry": { "query": "entry", "shape": "stadium" }
+  }
+}

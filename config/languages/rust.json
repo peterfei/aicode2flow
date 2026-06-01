@@ -1,0 +1,12 @@
+{
+  "name": "rust",
+  "extensions": [".rs"],
+  "grammar": "tree-sitter-rust",
+  "entryPoints": [{ "pattern": "main", "match": "full" }],
+  "nodeTypes": {
+    "function": { "query": "function", "shape": "round" },
+    "condition": { "query": "condition", "shape": "diamond" },
+    "loop": { "query": "loop", "shape": "hex" },
+    "entry": { "query": "entry", "shape": "stadium" }
+  }
+}

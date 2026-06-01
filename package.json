@@ -1,0 +1,55 @@
+{
+  "name": "aicode2flow",
+  "version": "0.1.0",
+  "description": "AI-powered code to Mermaid flowchart — 代码一键生成流程图",
+  "keywords": [
+    "mermaid",
+    "flowchart",
+    "code-visualization",
+    "ai",
+    "tree-sitter"
+  ],
+  "homepage": "https://github.com/peterfei/aicode2flow",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peterfei/aicode2flow.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "aicode2flow": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "config",
+    "queries"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup src/cli.ts --format esm --target node18 --out-dir dist --clean",
+    "dev": "tsup src/cli.ts --format esm --target node18 --out-dir dist --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0",
+    "tree-sitter": "^0.25.0",
+    "tree-sitter-c": "^0.24.1",
+    "tree-sitter-cpp": "^0.23.4",
+    "tree-sitter-go": "^0.25.0",
+    "tree-sitter-java": "^0.23.5",
+    "tree-sitter-javascript": "^0.25.0",
+    "tree-sitter-python": "^0.25.0",
+    "tree-sitter-rust": "^0.24.0",
+    "tree-sitter-typescript": "^0.23.2"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  }
+}

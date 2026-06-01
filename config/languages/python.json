@@ -1,0 +1,16 @@
+{
+  "name": "python",
+  "extensions": [".py"],
+  "grammar": "tree-sitter-python",
+  "entryPoints": [
+    { "pattern": "main", "match": "full" },
+    { "pattern": "__name__ == \"__main__\"", "match": "contains" }
+  ],
+  "nodeTypes": {
+    "function": { "query": "function", "shape": "round" },
+    "method": { "query": "method", "shape": "round" },
+    "condition": { "query": "condition", "shape": "diamond" },
+    "loop": { "query": "loop", "shape": "hex" },
+    "entry": { "query": "entry", "shape": "stadium" }
+  }
+}

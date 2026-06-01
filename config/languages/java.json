@@ -1,0 +1,12 @@
+{
+  "name": "java",
+  "extensions": [".java"],
+  "grammar": "tree-sitter-java",
+  "entryPoints": [{ "pattern": "main", "match": "full" }],
+  "nodeTypes": {
+    "function": { "query": "function", "shape": "round" },
+    "condition": { "query": "condition", "shape": "diamond" },
+    "loop": { "query": "loop", "shape": "hex" },
+    "entry": { "query": "entry", "shape": "stadium" }
+  }
+}
