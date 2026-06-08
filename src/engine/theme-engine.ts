@@ -94,17 +94,33 @@ export function generateStyledFlowchart(
   lines.push(`flowchart ${direction}`);
   lines.push('');
 
+  // JavaScript 保留字和内部函数名集合
+  const reservedWords = new Set([
+    'constructor', 'class', 'extends', 'prototype', 'typeof', 'instanceof',
+    'return', 'if', 'else', 'for', 'while', 'function', 'var', 'let', 'const',
+    'import', 'export', 'default', 'new', 'this', 'super', 'static', 'get', 'set',
+    'break', 'case', 'catch', 'continue', 'debugger', 'delete', 'do', 'finally',
+    'in', 'switch', 'throw', 'try', 'typeof', 'void', 'with', 'yield',
+    'sanitizeId', 'cleanNodeId', 'scanFiles', 'walk', 'mergeResults', '_escapeReservedId'
+  ]);
+
+  // 转义节点ID，避免与JavaScript保留字冲突
+  function escapeNodeId(id: string): string {
+    return reservedWords.has(id) ? `${id}_fn` : id;
+  }
+
   // 渲染节点
   for (const n of nodes) {
     const shape = getShapeSyntax(n.shape);
     const entryMarker = theme?.entryMarker ?? '';
     const label = n.isEntry && entryMarker ? `${entryMarker} ${n.name}` : n.name;
+    const safeId = escapeNodeId(n.id);
 
     // 对于stadium形状，使用标准格式：nodeID([label])
     if (n.shape === 'stadium') {
-      lines.push(`  ${n.id}([${n.name}])`);
+      lines.push(`  ${safeId}([${n.name}])`);
     } else {
-      lines.push(`  ${n.id}${shape.open}"${label}"${shape.close}`);
+      lines.push(`  ${safeId}${shape.open}"${label}"${shape.close}`);
     }
 
     // 应用节点样式
@@ -112,7 +128,7 @@ export function generateStyledFlowchart(
       const nodeType = inferNodeType(n);
       const style = theme.styles[nodeType];
       if (style) {
-        lines.push(`  style ${n.id} ${style}`);
+        lines.push(`  style ${safeId} ${style}`);
       }
     }
   }
@@ -121,7 +137,9 @@ export function generateStyledFlowchart(
   if (edges.length > 0) {
     lines.push('');
     for (const e of edges) {
-      lines.push(`  ${e.from} --> ${e.to}`);
+      const safeFrom = escapeNodeId(e.from);
+      const safeTo = escapeNodeId(e.to);
+      lines.push(`  ${safeFrom} --> ${safeTo}`);
     }
   }
 

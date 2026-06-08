@@ -63,7 +63,7 @@ function scanFiles(
   return results;
 }
 
-function sanitizeId(name: string): string {
+function _escapeReservedId(name: string): string {
   return name.replace(/[^a-zA-Z0-9_]/g, '_').replace(/^(\d)/, '_$1');
 }
 
@@ -90,7 +90,7 @@ function mergeResults(results: AnalysisResult[]): AnalysisResult {
   const edges: { from: string; to: string }[] = [];
   for (const n of allNodes.values()) {
     for (const callee of n.calls) {
-      const calleeId = sanitizeId(callee);
+      const calleeId = _escapeReservedId(callee);
       if (knownIds.has(calleeId)) {
         edges.push({ from: n.id, to: calleeId });
       }
