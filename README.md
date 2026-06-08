@@ -85,6 +85,145 @@ flowchart TD
 
 ---
 
+### 🎯 自我分析
+
+aicode2flow 甚至可以分析自己的源码结构！
+
+```bash
+npx aicode2flow ./src/ --theme github-dark
+```
+
+📊 **分析结果**: 39个函数，41条调用关系
+
+```mermaid
+%%init: {'theme':'dark', 'themeVariables': { 'primaryColor': '#569cd6', 'primaryTextColor': '#fff', 'primaryBorderColor': '#4a8acb', 'lineColor': '#808080', 'secondaryColor': '#4ec9b0', 'tertiaryColor': '#dcdcaa', 'background': '#1e1e1e', 'fontSize': '14px' }}
+flowchart TD
+
+  main([main])
+  style main fill:#c586c0,stroke:#a969a3,stroke-width:4px,color:#fff
+  _escapeReservedId_fn("_escapeReservedId")
+  style _escapeReservedId_fn fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  analyze("analyze")
+  style analyze fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  analyzeFile("analyzeFile")
+  style analyzeFile fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  applyThemeToMermaid("applyThemeToMermaid")
+  style applyThemeToMermaid fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  autoLoad("autoLoad")
+  style autoLoad fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  clearCache("clearCache")
+  style clearCache fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  constructor_fn("constructor")
+  style constructor_fn fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  createDefaultTheme("createDefaultTheme")
+  style createDefaultTheme fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  detect("detect")
+  style detect fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  escapeNodeId("escapeNodeId")
+  style escapeNodeId fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  findConfigDir("findConfigDir")
+  style findConfigDir fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  findQueriesDir("findQueriesDir")
+  style findQueriesDir fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  generateFlowchart("generateFlowchart")
+  style generateFlowchart fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  generateStyledFlowchart("generateStyledFlowchart")
+  style generateStyledFlowchart fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  generateThemedFlowchart("generateThemedFlowchart")
+  style generateThemedFlowchart fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  get_fn("get")
+  style get_fn fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  getShapeSyntax("getShapeSyntax")
+  style getShapeSyntax fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  getStats("getStats")
+  style getStats fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  has("has")
+  style has fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  inferNodeType("inferNodeType")
+  style inferNodeType fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  inferTypeFromSyntax("inferTypeFromSyntax")
+  style inferTypeFromSyntax fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  isValidStyleRule("isValidStyleRule")
+  style isValidStyleRule fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  languages("languages")
+  style languages fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  list("list")
+  style list fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  loadAll("loadAll")
+  style loadAll fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  loadFrom("loadFrom")
+  style loadFrom fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  loadGrammar("loadGrammar")
+  style loadGrammar fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  merge("merge")
+  style merge fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  mergeResults_fn("mergeResults")
+  style mergeResults_fn fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  names("names")
+  style names fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  parseNodeInfo("parseNodeInfo")
+  style parseNodeInfo fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  register("register")
+  style register fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  renderImage("renderImage")
+  style renderImage fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  resolve("resolve")
+  style resolve fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  sanitizeId_fn("sanitizeId")
+  style sanitizeId_fn fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  scanFiles_fn("scanFiles")
+  style scanFiles_fn fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  validateTheme("validateTheme")
+  style validateTheme fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+  walk_fn("walk")
+  style walk_fn fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+
+  main --> resolve
+  main --> get_fn
+  main --> languages
+  main --> scanFiles_fn
+  main --> analyzeFile
+  main --> mergeResults_fn
+  main --> detect
+  main --> generateThemedFlowchart
+  main --> generateFlowchart
+  main --> renderImage
+  main --> list
+  walk_fn --> has
+  walk_fn --> detect
+  mergeResults_fn --> has
+  mergeResults_fn --> get_fn
+  mergeResults_fn --> _escapeReservedId_fn
+  analyzeFile --> analyze
+  loadGrammar --> has
+  loadGrammar --> get_fn
+  constructor_fn --> loadAll
+  analyze --> loadGrammar
+  analyze --> has
+  analyze --> get_fn
+  analyze --> sanitizeId_fn
+  detect --> has
+  detect --> get_fn
+  generateFlowchart --> generateStyledFlowchart
+  generateThemedFlowchart --> generateStyledFlowchart
+  applyThemeToMermaid --> parseNodeInfo
+  applyThemeToMermaid --> has
+  escapeNodeId --> has
+  escapeNodeId --> getShapeSyntax
+  escapeNodeId --> inferNodeType
+  parseNodeInfo --> inferTypeFromSyntax
+  validateTheme --> isValidStyleRule
+  loadFrom --> register
+  autoLoad --> loadFrom
+  resolve --> has
+  resolve --> get_fn
+  resolve --> merge
+  getStats --> autoLoad
+  linkStyle default stroke:#808080,stroke-width:2px,color:#d4d4d4
+```
+
+---
+
 ## 主题系统
 
 aicode2flow 内置 **13 个精美主题**，让你的流程图更加专业。
