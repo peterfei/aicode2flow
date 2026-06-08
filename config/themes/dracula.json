@@ -1,0 +1,23 @@
+{
+  "name": "dracula",
+  "meta": {
+    "description": "流行的Dracula配色方案",
+    "author": "aicode2flow",
+    "version": "1.0.0",
+    "url": "https://draculatheme.com"
+  },
+  "styles": {
+    "function": "fill:#bd93f9,stroke:#ff79c6,stroke-width:2px,color:#282a36",
+    "method": "fill:#8be9fd,stroke:#50fa7b,stroke-width:2px,color:#282a36",
+    "condition": "fill:#ff79c6,stroke:#ff5555,stroke-width:2px,color:#282a36",
+    "loop": "fill:#ffb86c,stroke:#f1fa8c,stroke-width:2px,color:#282a36",
+    "entry": "fill:#ff5555,stroke:#ffb86c,stroke-width:4px,color:#282a36",
+    "class": "fill:#6272a4,stroke:#f8f8f2,stroke-width:2px,color:#f8f8f2"
+  },
+  "links": {
+    "default": "stroke:#6272a4,stroke-width:2px,color:#f8f8f2"
+  },
+  "directives": [
+    "init: {'theme':'base', 'themeVariables': { 'primaryColor': '#bd93f9', 'primaryTextColor': '#282a36', 'primaryBorderColor': '#ff79c6', 'lineColor': '#6272a4', 'secondaryColor': '#8be9fd', 'tertiaryColor': '#ff79c6', 'background': '#282a36', 'fontSize': '14px' }}"
+  ]
+}

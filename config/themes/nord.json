@@ -1,0 +1,23 @@
+{
+  "name": "nord",
+  "meta": {
+    "description": "Nord - 一眼心动的北极蓝调配色",
+    "author": "aicode2flow",
+    "version": "1.0.0",
+    "url": "https://www.nordtheme.com"
+  },
+  "styles": {
+    "function": "fill:#88c0d0,stroke:#81a1c1,stroke-width:2px,color:#2e3440",
+    "method": "fill:#a3be8c,stroke:#88c0d0,stroke-width:2px,color:#2e3440",
+    "condition": "fill:#ebcb8b,stroke:#d08770,stroke-width:2px,color:#2e3440",
+    "loop": "fill:#bf616a,stroke:#b48ead,stroke-width:2px,color:#2e3440",
+    "entry": "fill:#5e81ac,stroke:#4c566a,stroke-width:4px,color:#eceff4",
+    "class": "fill:#4c566a,stroke:#d8dee9,stroke-width:2px,color:#eceff4"
+  },
+  "links": {
+    "default": "stroke:#4c566a,stroke-width:2px,color:#d8dee9"
+  },
+  "directives": [
+    "init: {'theme':'base', 'themeVariables': { 'primaryColor': '#88c0d0', 'primaryTextColor': '#2e3440', 'primaryBorderColor': '#81a1c1', 'lineColor': '#4c566a', 'secondaryColor': '#a3be8c', 'tertiaryColor': '#ebcb8b', 'background': '#2e3440', 'fontSize': '14px' }}"
+  ]
+}

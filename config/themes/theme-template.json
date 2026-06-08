@@ -1,0 +1,117 @@
+{
+  "_comment": [
+    "aicode2flow 主题模板",
+    "复制此文件创建自定义主题",
+    "详见：https://github.com/your-repo/docs/themes.md"
+  ],
+
+  "name": "your-theme-name",
+  "extends": "optional-parent-theme",
+
+  "meta": {
+    "description": "主题描述",
+    "author": "你的名字",
+    "version": "1.0.0",
+    "url": "https://optional-url.com"
+  },
+
+  "styles": {
+    "function": "fill:#颜色,stroke:#颜色,stroke-width:2px,color:#文字颜色",
+    "method": "fill:#颜色,stroke:#颜色,stroke-width:2px,color:#文字颜色",
+    "condition": "fill:#颜色,stroke:#颜色,stroke-width:2px,color:#文字颜色",
+    "loop": "fill:#颜色,stroke:#颜色,stroke-width:2px,color:#文字颜色",
+    "entry": "fill:#颜色,stroke:#颜色,stroke-width:4px,color:#文字颜色",
+    "class": "fill:#颜色,stroke:#颜色,stroke-width:2px,color:#文字颜色"
+  },
+
+  "links": {
+    "default": "stroke:#颜色,stroke-width:2px,color:#文字颜色"
+  },
+
+  "directives": [
+    "init: {'theme':'base', 'themeVariables': { 'primaryColor': '#颜色', 'primaryTextColor': '#颜色', 'primaryBorderColor': '#颜色', 'lineColor': '#颜色', 'secondaryColor': '#颜色', 'tertiaryColor': '#颜色', 'background': '#颜色', 'fontSize': '14px' }}"
+  ],
+
+  "_style_reference": {
+    "Mermaid样式语法": "详见：https://mermaid.js.org/syntax/flowchart.html#styling",
+    "可用样式属性": [
+      "fill: 填充颜色",
+      "stroke: 边框颜色",
+      "stroke-width: 边框宽度",
+      "stroke-dasharray: 虚线样式 (如 '5 5')",
+      "color: 文字颜色",
+      "opacity: 透明度 (0-1)",
+      "font-family: 字体",
+      "font-size: 字号"
+    ],
+    "颜色格式": [
+      "十六进制: #ff0000",
+      "RGB: rgb(255, 0, 0)",
+      "RGBA: rgba(255, 0, 0, 0.5)",
+      "颜色名称: red, blue, etc."
+    ]
+  },
+
+  "_theme_reference": {
+    "Mermaid主题选项": [
+      "default: 默认浅色主题",
+      "base: 基础主题（可完全自定义）",
+      "dark: 深色主题",
+      "neutral: 中性主题",
+      "forest: 森林主题"
+    ],
+    "主题变量": {
+      "primaryColor": "主色调",
+      "primaryTextColor": "主文本颜色",
+      "primaryBorderColor": "主边框颜色",
+      "lineColor": "线条颜色",
+      "secondaryColor": "次要色调",
+      "tertiaryColor": "第三色调",
+      "background": "背景颜色",
+      "fontSize": "字体大小",
+      "fontFamily": "字体系列"
+    }
+  },
+
+  "_examples": {
+    "简洁主题": {
+      "styles": {
+        "function": "fill:#4a90e2,stroke:#357abd,color:#fff"
+      }
+    },
+    "半透明主题": {
+      "styles": {
+        "function": "fill:#4a90e2,stroke:#357abd,color:#fff,opacity:0.7"
+      }
+    },
+    "虚线边框主题": {
+      "styles": {
+        "function": "fill:#4a90e2,stroke:#357abd,stroke-dasharray:5 5,color:#fff"
+      }
+    },
+    "自定义字体主题": {
+      "styles": {
+        "function": "fill:#4a90e2,stroke:#357abd,color:#fff,font-family:Monaco,font-size:16px"
+      }
+    }
+  },
+
+  "_best_practices": {
+    "配色建议": [
+      "确保足够的对比度（WCAG AA标准：4.5:1）",
+      "背景色与填充色有明显区分",
+      "边框色比填充色稍深",
+      "文字颜色与背景色对比清晰"
+    ],
+    "性能建议": [
+      "使用十六进制颜色（性能最佳）",
+      "避免过多的透明度叠加",
+      "简单的stroke-width提升性能"
+    ],
+    "可访问性": [
+      "提供高对比度版本",
+      "避免仅依赖颜色传达信息",
+      "测试色盲友好性"
+    ]
+  }
+}

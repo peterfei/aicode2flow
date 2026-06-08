@@ -1,0 +1,136 @@
+{
+  "name": "modern",
+  "displayName": "现代主题",
+  "description": "扁平化设计，柔和色彩，适合现代文档",
+  "version": "1.0.0",
+  "author": "aicode2flow",
+  "colors": {
+    "background": "#f8f9fa",
+    "function": {
+      "fill": "#4a90e2",
+      "stroke": "#357abd",
+      "text": "#ffffff"
+    },
+    "method": {
+      "fill": "#50e3c2",
+      "stroke": "#3db8a0",
+      "text": "#ffffff"
+    },
+    "condition": {
+      "fill": "#f5a623",
+      "stroke": "#d4881c",
+      "text": "#ffffff"
+    },
+    "loop": {
+      "fill": "#7ed321",
+      "stroke": "#66a91a",
+      "text": "#ffffff"
+    },
+    "entry": {
+      "fill": "#bd10e0",
+      "stroke": "#9010a8",
+      "text": "#ffffff"
+    },
+    "class": {
+      "fill": "#6c5ce7",
+      "stroke": "#5541c5",
+      "text": "#ffffff"
+    },
+    "edge": {
+      "stroke": "#9b9b9b",
+      "text": "#666666"
+    }
+  },
+  "styles": {
+    "fontSize": "14px",
+    "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+    "fontWeight": "500",
+    "strokeWidth": "2px",
+    "borderRadius": "8px",
+    "padding": "8px 12px"
+  },
+  "effects": {
+    "shadow": {
+      "enabled": true,
+      "type": "soft",
+      "color": "rgba(0, 0, 0, 0.1)",
+      "blur": "10px",
+      "offsetX": "0px",
+      "offsetY": "4px"
+    },
+    "gradient": {
+      "enabled": true,
+      "type": "linear",
+      "angle": 135,
+      "intensity": "subtle"
+    }
+  },
+  "shapes": {
+    "function": "round",
+    "method": "round",
+    "condition": "diamond",
+    "loop": "hex",
+    "entry": "stadium",
+    "class": "rect"
+  },
+  "layout": {
+    "direction": "TD",
+    "spacing": {
+      "node": 50,
+      "rank": 80,
+      "edge": 30
+    }
+  },
+  "icons": {
+    "enabled": true,
+    "style": "outline",
+    "size": 16,
+    "position": "left"
+  },
+  "interactivity": {
+    "hover": {
+      "enabled": true,
+      "effects": ["brightness", "scale"],
+      "delay": 150
+    },
+    "click": {
+      "enabled": true,
+      "action": "tooltip"
+    },
+    "zoom": {
+      "enabled": true,
+      "min": 0.5,
+      "max": 3
+    }
+  },
+  "animations": {
+    "initial": {
+      "type": "fade",
+      "duration": 300,
+      "stagger": 50
+    },
+    "flow": {
+      "enabled": false,
+      "speed": 2
+    }
+  },
+  "codeDisplay": {
+    "enabled": true,
+    "showOnHover": true,
+    "lines": 5,
+    "syntaxHighlight": true
+  },
+  "mermaid": {
+    "theme": "base",
+    "themeVariables": {
+      "primaryColor": "#4a90e2",
+      "primaryTextColor": "#fff",
+      "primaryBorderColor": "#357abd",
+      "lineColor": "#9b9b9b",
+      "secondaryColor": "#50e3c2",
+      "tertiaryColor": "#f5a623",
+      "background": "#f8f9fa",
+      "fontSize": "14px"
+    }
+  }
+}

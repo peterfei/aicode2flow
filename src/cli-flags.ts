@@ -12,6 +12,7 @@ export const FLAGS: Record<string, FlagDef> = {
   language:  { alias: 'l', type: 'string', desc: 'Force language (go/python/javascript)' },
   exclude:   { alias: 'e', type: 'string', desc: 'Exclude pattern (glob)' },
   direction: { type: 'string', desc: 'Flow direction: TD (top-down) / LR (left-right)', default: 'TD' },
-  theme:     { type: 'string', desc: 'Mermaid theme', default: 'default' },
+  theme:     { alias: 't', type: 'string', desc: 'Theme name (github-dark, dracula, nord, etc.)' },
+  listThemes: { type: 'boolean', desc: 'List all available themes (no path required)' },
   ai:        { type: 'boolean', desc: 'Enable AI semantic enhancement', default: false },
 };

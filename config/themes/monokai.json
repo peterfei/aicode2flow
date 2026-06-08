@@ -1,0 +1,22 @@
+{
+  "name": "monokai",
+  "meta": {
+    "description": "经典Monokai配色方案",
+    "author": "aicode2flow",
+    "version": "1.0.0"
+  },
+  "styles": {
+    "function": "fill:#66d9ef,stroke:#fd971f,stroke-width:2px,color:#272822",
+    "method": "fill:#a6e22e,stroke:#66d9ef,stroke-width:2px,color:#272822",
+    "condition": "fill:#fd971f,stroke:#f92672,stroke-width:2px,color:#272822",
+    "loop": "fill:#f92672,stroke:#ae81ff,stroke-width:2px,color:#272822",
+    "entry": "fill:#e6db74,stroke:#75715e,stroke-width:4px,color:#272822",
+    "class": "fill:#75715e,stroke:#f9f8f5,stroke-width:2px,color:#f9f8f5"
+  },
+  "links": {
+    "default": "stroke:#75715e,stroke-width:2px,color:#f8f8f2"
+  },
+  "directives": [
+    "init: {'theme':'base', 'themeVariables': { 'primaryColor': '#66d9ef', 'primaryTextColor': '#272822', 'primaryBorderColor': '#fd971f', 'lineColor': '#75715e', 'secondaryColor': '#a6e22e', 'tertiaryColor': '#fd971f', 'background': '#272822', 'fontSize': '14px' }}"
+  ]
+}

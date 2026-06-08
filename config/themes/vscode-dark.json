@@ -1,0 +1,22 @@
+{
+  "name": "vscode-dark",
+  "meta": {
+    "description": "VS Code Dark+ 默认主题配色",
+    "author": "aicode2flow",
+    "version": "1.0.0"
+  },
+  "styles": {
+    "function": "fill:#dcdcaa,stroke:#4a4a4a,stroke-width:2px,color:#000000",
+    "method": "fill:#569cd6,stroke:#3b5898,stroke-width:2px,color:#ffffff",
+    "condition": "fill:#c586c0,stroke:#8a5eb8,stroke-width:2px,color:#ffffff",
+    "loop": "fill:#ce9178,stroke:#a66259,stroke-width:2px,color:#ffffff",
+    "entry": "fill:#4ec9b0,stroke:#3ba998,stroke-width:4px,color:#000000",
+    "class": "fill:#4fc1ff,stroke:#388bd6,stroke-width:2px,color:#000000"
+  },
+  "links": {
+    "default": "stroke:#606060,stroke-width:2px,color:#d4d4d4"
+  },
+  "directives": [
+    "init: {'theme':'dark', 'themeVariables': { 'primaryColor': '#569cd6', 'primaryTextColor': '#fff', 'primaryBorderColor': '#3b5898', 'lineColor': '#606060', 'secondaryColor': '#4ec9b0', 'tertiaryColor': '#c586c0', 'background': '#1e1e1e', 'fontSize': '14px' }}"
+  ]
+}

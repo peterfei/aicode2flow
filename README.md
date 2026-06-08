@@ -38,7 +38,7 @@ func main() {
 
 ```mermaid
 flowchart TD
-  main(["⭐ main"])
+  main([main])
   greet("greet")
   validate("validate")
   processUser("processUser")
@@ -55,7 +55,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  main(["⭐ main"])
+  main([main])
   greet("greet")
   validate("validate")
   process_user("process_user")
@@ -72,7 +72,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  main(["⭐ main"])
+  main([main])
   greet("greet")
   validate("validate")
   processUser("processUser")
@@ -82,6 +82,78 @@ flowchart TD
   processUser --> saveUser
   main --> processUser
 ```
+
+---
+
+## 主题系统
+
+aicode2flow 内置 **13 个精美主题**，让你的流程图更加专业。
+
+### 快速使用
+
+```bash
+# 查看所有主题
+aicode2flow --listThemes
+
+# 使用主题
+aicode2flow src.go --theme github-dark
+aicode2flow src.py -o flow.md --theme dracula
+```
+
+### 主题预览
+
+#### github-dark (推荐)
+适合深色技术文档和开发者博客
+
+```mermaid
+%%init: {'theme':'dark', 'themeVariables': { 'primaryColor': '#569cd6' }}
+flowchart TD
+  main([main])
+  loadConfig("loadConfig")
+  validate("validate")
+  main --> loadConfig
+  main --> validate
+```
+
+#### dracula (流行)
+流行的 Dracula 配色方案
+
+```mermaid
+%%init: {'theme':'base', 'themeVariables': { 'primaryColor': '#bd93f9' }}
+flowchart TD
+  main([main])
+  loadConfig("loadConfig")
+  validate("validate")
+  main --> loadConfig
+  main --> validate
+```
+
+#### nord (清新)
+一眼心动的北极蓝调
+
+```mermaid
+%%init: {'theme':'base', 'themeVariables': { 'primaryColor': '#88c0d0' }}
+flowchart TD
+  main([main])
+  loadConfig("loadConfig")
+  validate("validate")
+  main --> loadConfig
+  main --> validate
+```
+
+### 更多主题
+
+| 主题 | 适用场景 |
+|------|----------|
+| `github-dark` | 深色文档、开发者博客 |
+| `github-light` | 浅色文档、打印 |
+| `dracula` | 流行配色、现代文档 |
+| `nord` | 清新冷淡风格 |
+| `monokai` | 经典编辑器风格 |
+| `high-contrast` | 无障碍访问 |
+| `print-friendly` | 黑白打印 |
+
+> 📖 查看完整主题指南：[USAGE.md](USAGE.md)
 
 ---
 

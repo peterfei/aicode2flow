@@ -1,0 +1,22 @@
+{
+  "name": "github-light",
+  "meta": {
+    "description": "匹配GitHub Light的清新配色",
+    "author": "aicode2flow",
+    "version": "1.0.0"
+  },
+  "styles": {
+    "function": "fill:#0969da,stroke:#0550ae,stroke-width:2px,color:#fff",
+    "method": "fill:#1a7f37,stroke:#0a5c23,stroke-width:2px,color:#fff",
+    "condition": "fill:#9a6700,stroke:#734f09,stroke-width:2px,color:#fff",
+    "loop": "fill:#8250df,stroke:#6435b9,stroke-width:2px,color:#fff",
+    "entry": "fill:#cf222e,stroke:#a81020,stroke-width:4px,color:#fff",
+    "class": "fill:#6e6e6e,stroke:#4a4a4a,stroke-width:2px,color:#fff"
+  },
+  "links": {
+    "default": "stroke:#6e6e6e,stroke-width:2px,color:#24292f"
+  },
+  "directives": [
+    "init: {'theme':'default', 'themeVariables': { 'primaryColor': '#0969da', 'primaryTextColor': '#fff', 'primaryBorderColor': '#0550ae', 'lineColor': '#6e6e6e', 'secondaryColor': '#1a7f37', 'tertiaryColor': '#9a6700', 'background': '#ffffff', 'fontSize': '14px' }}"
+  ]
+}

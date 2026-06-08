@@ -6,7 +6,8 @@ import { Command } from 'commander';
 import chalk from 'chalk';
 import { Registry } from './engine/registry.js';
 import { Analyzer } from './engine/analyzer.js';
-import { generateFlowchart } from './engine/template.js';
+import { generateFlowchart, generateThemedFlowchart } from './engine/template.js';
+import { globalRegistry } from './engine/theme-registry.js';
 import { FLAGS } from './cli-flags.js';
 import type { LanguageName, LanguageConfig, AnalysisResult, AnalyzedNode } from './types.js';
 
@@ -20,7 +21,7 @@ program
   .name('aicode2flow')
   .description('AI-powered code to Mermaid flowchart — 代码一键生成流程图')
   .version('0.1.0')
-  .argument('<path>', 'Source code file or directory path')
+  .argument('[path]', 'Source code file or directory path')
   .allowExcessArguments(false);
 
 for (const [key, def] of Object.entries(FLAGS)) {
@@ -206,8 +207,21 @@ async function main(path: string, options: Record<string, any>) {
     process.exit(0);
   }
 
-  // Generate Mermaid
-  const mermaid = generateFlowchart(result.nodes, result.edges, options.direction ?? 'TD');
+  // Generate Mermaid (with theme support)
+  let mermaid: string;
+  if (options.theme) {
+    // 加载主题
+    try {
+      const theme = globalRegistry.resolve(options.theme);
+      mermaid = generateThemedFlowchart(result.nodes, result.edges, options.direction ?? 'TD', theme);
+    } catch (e: any) {
+      console.error(chalk.yellow(`⚠ Failed to load theme '${options.theme}': ${e.message}`));
+      console.error(chalk.yellow(`Using default flowchart instead`));
+      mermaid = generateFlowchart(result.nodes, result.edges, options.direction ?? 'TD');
+    }
+  } else {
+    mermaid = generateFlowchart(result.nodes, result.edges, options.direction ?? 'TD');
+  }
   const markdown = `\`\`\`mermaid\n${mermaid}\n\`\`\``;
 
   // Determine output format
@@ -241,7 +255,28 @@ async function main(path: string, options: Record<string, any>) {
   console.log(chalk.dim(`📦 ${result.nodes.length} nodes, ${result.edges.length} edges`));
 }
 
-program.action((path: string, options: Record<string, any>) => {
+program.action((path: string | undefined, options: Record<string, any>) => {
+  // Handle --list-themes
+  if (options.listThemes) {
+    const themes = globalRegistry.list();
+    console.log(chalk.bold('📊 Available Themes:'));
+    console.log(chalk.dim('─'.repeat(50)));
+    for (const theme of themes) {
+      console.log(`${chalk.cyan(theme.name)}${theme.meta?.description ? ` - ${theme.meta.description}` : ''}`);
+    }
+    console.log(chalk.dim('─'.repeat(50)));
+    console.log(chalk.dim(`Total: ${themes.length} theme(s)`));
+    process.exit(0);
+  }
+
+  // Check if path is provided
+  if (!path) {
+    console.error(chalk.red('✖ Missing required argument: path'));
+    console.error(chalk.dim('Usage: aicode2flow <path> [options]'));
+    console.error(chalk.dim('Run: aicode2flow --help for more information'));
+    process.exit(1);
+  }
+
   main(path, options).catch((e) => {
     console.error(chalk.red(`✖ Unexpected error: ${e.message}`));
     process.exit(1);

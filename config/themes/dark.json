@@ -1,0 +1,137 @@
+{
+  "name": "dark",
+  "displayName": "暗黑主题",
+  "description": "深色背景，适合暗色环境和IDE集成",
+  "version": "1.0.0",
+  "author": "aicode2flow",
+  "colors": {
+    "background": "#1e1e1e",
+    "function": {
+      "fill": "#569cd6",
+      "stroke": "#4a8acb",
+      "text": "#d4d4d4"
+    },
+    "method": {
+      "fill": "#4ec9b0",
+      "stroke": "#42b09a",
+      "text": "#1e1e1e"
+    },
+    "condition": {
+      "fill": "#dcdcaa",
+      "stroke": "#c4c295",
+      "text": "#1e1e1e"
+    },
+    "loop": {
+      "fill": "#ce9178",
+      "stroke": "#b87e69",
+      "text": "#1e1e1e"
+    },
+    "entry": {
+      "fill": "#c586c0",
+      "stroke": "#a969a3",
+      "text": "#ffffff"
+    },
+    "class": {
+      "fill": "#4fc1ff",
+      "stroke": "#42a8e0",
+      "text": "#1e1e1e"
+    },
+    "edge": {
+      "stroke": "#808080",
+      "text": "#d4d4d4"
+    }
+  },
+  "styles": {
+    "fontSize": "14px",
+    "fontFamily": "'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace",
+    "fontWeight": "400",
+    "strokeWidth": "2px",
+    "borderRadius": "4px",
+    "padding": "8px 12px"
+  },
+  "effects": {
+    "shadow": {
+      "enabled": true,
+      "type": "glow",
+      "color": "rgba(86, 156, 214, 0.3)",
+      "blur": "12px",
+      "offsetX": "0px",
+      "offsetY": "0px"
+    },
+    "gradient": {
+      "enabled": true,
+      "type": "radial",
+      "intensity": "muted"
+    }
+  },
+  "shapes": {
+    "function": "round",
+    "method": "round",
+    "condition": "diamond",
+    "loop": "hex",
+    "entry": "stadium",
+    "class": "rect"
+  },
+  "layout": {
+    "direction": "TD",
+    "spacing": {
+      "node": 55,
+      "rank": 85,
+      "edge": 35
+    }
+  },
+  "icons": {
+    "enabled": true,
+    "style": "neon",
+    "size": 16,
+    "position": "left"
+  },
+  "interactivity": {
+    "hover": {
+      "enabled": true,
+      "effects": ["glow", "brightness"],
+      "delay": 120
+    },
+    "click": {
+      "enabled": true,
+      "action": "tooltip"
+    },
+    "zoom": {
+      "enabled": true,
+      "min": 0.5,
+      "max": 3
+    }
+  },
+  "animations": {
+    "initial": {
+      "type": "fade",
+      "duration": 400,
+      "stagger": 60
+    },
+    "flow": {
+      "enabled": true,
+      "speed": 1.5,
+      "color": "rgba(86, 156, 214, 0.6)"
+    }
+  },
+  "codeDisplay": {
+    "enabled": true,
+    "showOnHover": true,
+    "lines": 6,
+    "syntaxHighlight": true,
+    "theme": "vs-dark"
+  },
+  "mermaid": {
+    "theme": "dark",
+    "themeVariables": {
+      "primaryColor": "#569cd6",
+      "primaryTextColor": "#d4d4d4",
+      "primaryBorderColor": "#4a8acb",
+      "lineColor": "#808080",
+      "secondaryColor": "#4ec9b0",
+      "tertiaryColor": "#dcdcaa",
+      "background": "#1e1e1e",
+      "fontSize": "14px"
+    }
+  }
+}

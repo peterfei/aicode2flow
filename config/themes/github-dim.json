@@ -1,0 +1,19 @@
+{
+  "name": "github-dim",
+  "extends": "github-dark",
+  "meta": {
+    "description": "GitHub Dark的低调版本（半透明）",
+    "author": "aicode2flow",
+    "version": "1.0.0"
+  },
+  "styles": {
+    "function": "fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff,opacity:0.7",
+    "method": "fill:#4ec9b0,stroke:#42b09a,stroke-width:2px,color:#1e1e1e,opacity:0.7",
+    "condition": "fill:#dcdcaa,stroke:#c4c295,stroke-width:2px,color:#1e1e1e,opacity:0.7",
+    "loop": "fill:#ce9178,stroke:#b87e69,stroke-width:2px,color:#1e1e1e,opacity:0.7",
+    "entry": "fill:#c586c0,stroke:#a969a3,stroke-width:4px,color:#fff,opacity:0.9"
+  },
+  "links": {
+    "default": "stroke:#606060,stroke-width:1px,color:#a0a0a0,stroke-dasharray:5 5"
+  }
+}

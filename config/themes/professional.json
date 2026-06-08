@@ -1,0 +1,130 @@
+{
+  "name": "professional",
+  "displayName": "专业主题",
+  "description": "企业级配色，适合商务文档和技术报告",
+  "version": "1.0.0",
+  "author": "aicode2flow",
+  "colors": {
+    "background": "#ffffff",
+    "function": {
+      "fill": "#0052cc",
+      "stroke": "#0047b3",
+      "text": "#ffffff"
+    },
+    "method": {
+      "fill": "#00875a",
+      "stroke": "#006d48",
+      "text": "#ffffff"
+    },
+    "condition": {
+      "fill": "#ff991f",
+      "stroke": "#de7b08",
+      "text": "#172b4d"
+    },
+    "loop": {
+      "fill": "#6554c0",
+      "stroke": "#5042a3",
+      "text": "#ffffff"
+    },
+    "entry": {
+      "fill": "#de350b",
+      "stroke": "#b3280a",
+      "text": "#ffffff"
+    },
+    "class": {
+      "fill": "#0747a6",
+      "stroke": "#063780",
+      "text": "#ffffff"
+    },
+    "edge": {
+      "stroke": "#6b778c",
+      "text": "#42526e"
+    }
+  },
+  "styles": {
+    "fontSize": "13px",
+    "fontFamily": "'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    "fontWeight": "400",
+    "strokeWidth": "1.5px",
+    "borderRadius": "3px",
+    "padding": "6px 10px"
+  },
+  "effects": {
+    "shadow": {
+      "enabled": true,
+      "type": "subtle",
+      "color": "rgba(9, 30, 66, 0.25)",
+      "blur": "8px",
+      "offsetX": "0px",
+      "offsetY": "2px"
+    },
+    "gradient": {
+      "enabled": false
+    }
+  },
+  "shapes": {
+    "function": "rect",
+    "method": "rect",
+    "condition": "diamond",
+    "loop": "hex",
+    "entry": "stadium",
+    "class": "rect"
+  },
+  "layout": {
+    "direction": "TD",
+    "spacing": {
+      "node": 60,
+      "rank": 100,
+      "edge": 40
+    }
+  },
+  "icons": {
+    "enabled": true,
+    "style": "solid",
+    "size": 14,
+    "position": "left"
+  },
+  "interactivity": {
+    "hover": {
+      "enabled": true,
+      "effects": ["brightness"],
+      "delay": 100
+    },
+    "click": {
+      "enabled": true,
+      "action": "tooltip"
+    },
+    "zoom": {
+      "enabled": true,
+      "min": 0.5,
+      "max": 2.5
+    }
+  },
+  "animations": {
+    "initial": {
+      "type": "none"
+    },
+    "flow": {
+      "enabled": false
+    }
+  },
+  "codeDisplay": {
+    "enabled": true,
+    "showOnHover": true,
+    "lines": 8,
+    "syntaxHighlight": true
+  },
+  "mermaid": {
+    "theme": "base",
+    "themeVariables": {
+      "primaryColor": "#0052cc",
+      "primaryTextColor": "#fff",
+      "primaryBorderColor": "#0047b3",
+      "lineColor": "#6b778c",
+      "secondaryColor": "#00875a",
+      "tertiaryColor": "#ff991f",
+      "background": "#ffffff",
+      "fontSize": "13px"
+    }
+  }
+}

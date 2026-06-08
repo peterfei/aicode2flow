@@ -1,0 +1,22 @@
+{
+  "name": "print-friendly",
+  "meta": {
+    "description": "打印友好主题，节省墨水，适合黑白打印",
+    "author": "aicode2flow",
+    "version": "1.0.0"
+  },
+  "styles": {
+    "function": "fill:#ffffff,stroke:#000000,stroke-width:2px,color:#000000",
+    "method": "fill:#f0f0f0,stroke:#000000,stroke-width:2px,color:#000000",
+    "condition": "fill:#e0e0e0,stroke:#000000,stroke-width:2px,color:#000000",
+    "loop": "fill:#d0d0d0,stroke:#000000,stroke-width:2px,color:#000000",
+    "entry": "fill:#ffffff,stroke:#000000,stroke-width:4px,color:#000000",
+    "class": "fill:#c0c0c0,stroke:#000000,stroke-width:2px,color:#000000"
+  },
+  "links": {
+    "default": "stroke:#000000,stroke-width:1.5px,color:#000000"
+  },
+  "directives": [
+    "init: {'theme':'default', 'themeVariables': { 'primaryColor': '#ffffff', 'primaryTextColor': '#000000', 'primaryBorderColor': '#000000', 'lineColor': '#000000', 'secondaryColor': '#f0f0f0', 'tertiaryColor': '#e0e0e0', 'background': '#ffffff', 'fontSize': '12px' }}"
+  ]
+}

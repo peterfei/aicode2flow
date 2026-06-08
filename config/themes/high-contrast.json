@@ -1,0 +1,23 @@
+{
+  "name": "high-contrast",
+  "meta": {
+    "description": "高对比度主题，适合无障碍访问",
+    "author": "aicode2flow",
+    "version": "1.0.0",
+    "accessibility": "WCAG AAA"
+  },
+  "styles": {
+    "function": "fill:#000000,stroke:#ffffff,stroke-width:3px,color:#ffff00",
+    "method": "fill:#000000,stroke:#ffffff,stroke-width:3px,color:#00ff00",
+    "condition": "fill:#000000,stroke:#ffffff,stroke-width:3px,color:#ff00ff",
+    "loop": "fill:#000000,stroke:#ffffff,stroke-width:3px,color:#00ffff",
+    "entry": "fill:#000000,stroke:#ffff00,stroke-width:5px,color:#ffffff",
+    "class": "fill:#000000,stroke:#ffffff,stroke-width:3px,color:#ffffff"
+  },
+  "links": {
+    "default": "stroke:#ffffff,stroke-width:3px,color:#ffff00"
+  },
+  "directives": [
+    "init: {'theme':'base', 'themeVariables': { 'primaryColor': '#000000', 'primaryTextColor': '#ffff00', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': '#000000', 'tertiaryColor': '#000000', 'background': '#000000', 'fontSize': '16px', 'fontFamily': 'Arial Black' }}"
+  ]
+}

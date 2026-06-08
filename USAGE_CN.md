@@ -84,7 +84,7 @@ npx aicode2flow ./ -o project-flowchart.md
 
 ```
 flowchart TD
-  main(["⭐ main"])
+  main((["main"]))
   greet("greet")
   validate("validate")
   processUser("processUser")

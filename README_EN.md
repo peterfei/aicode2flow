@@ -49,7 +49,7 @@ func main() {
 
 ```mermaid
 flowchart TD
-  main(["⭐ main"])
+  main([main])
   greet("greet")
   validate("validate")
   processUser("processUser")
@@ -76,7 +76,7 @@ def main():
 
 ```mermaid
 flowchart TD
-  main(["⭐ main"])
+  main((["main"]))
   greet("greet")
   validate("validate")
   process_user("process_user")
@@ -99,7 +99,7 @@ function main() {
 
 ```mermaid
 flowchart TD
-  main(["⭐ main"])
+  main([main])
   greet("greet")
   validate("validate")
   processUser("processUser")
@@ -109,6 +109,78 @@ flowchart TD
   processUser --> saveUser
   main --> processUser
 ```
+
+---
+
+## Theme System
+
+aicode2flow comes with **13 beautiful built-in themes** to make your flowcharts more professional.
+
+### Quick Start
+
+```bash
+# List all themes
+aicode2flow --listThemes
+
+# Use a theme
+aicode2flow src.go --theme github-dark
+aicode2flow src.py -o flow.md --theme dracula
+```
+
+### Theme Preview
+
+#### github-dark (Recommended)
+Perfect for dark technical documentation and developer blogs
+
+```mermaid
+%%init: {'theme':'dark', 'themeVariables': { 'primaryColor': '#569cd6' }}
+flowchart TD
+  main([main])
+  loadConfig("loadConfig")
+  validate("validate")
+  main --> loadConfig
+  main --> validate
+```
+
+#### dracula (Popular)
+Popular Dracula color scheme
+
+```mermaid
+%%init: {'theme':'base', 'themeVariables': { 'primaryColor': '#bd93f9' }}
+flowchart TD
+  main([main])
+  loadConfig("loadConfig")
+  validate("validate")
+  main --> loadConfig
+  main --> validate
+```
+
+#### nord (Fresh)
+Arctic blue color scheme
+
+```mermaid
+%%init: {'theme':'base', 'themeVariables': { 'primaryColor': '#88c0d0' }}
+flowchart TD
+  main([main])
+  loadConfig("loadConfig")
+  validate("validate")
+  main --> loadConfig
+  main --> validate
+```
+
+### More Themes
+
+| Theme | Use Case |
+|-------|----------|
+| `github-dark` | Dark docs, developer blogs |
+| `github-light` | Light docs, printing |
+| `dracula` | Popular scheme, modern docs |
+| `nord` | Clean, cool style |
+| `monokai` | Classic editor style |
+| `high-contrast` | Accessibility |
+| `print-friendly` | B&W printing |
+
+> 📖 See complete theme guide: [USAGE.md](USAGE.md)
 
 ---
 
