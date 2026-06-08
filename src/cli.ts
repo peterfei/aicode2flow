@@ -20,7 +20,7 @@ const DEFAULT_IGNORE_DIRS = new Set(['node_modules', '.git', '.next', '.svn', '.
 program
   .name('aicode2flow')
   .description('AI-powered code to Mermaid flowchart — 代码一键生成流程图')
-  .version('0.1.0')
+  .version('0.2.0')
   .argument('[path]', 'Source code file or directory path')
   .allowExcessArguments(false);
 

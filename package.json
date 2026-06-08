@@ -1,13 +1,16 @@
 {
   "name": "aicode2flow",
-  "version": "0.1.1",
-  "description": "AI-powered code to Mermaid flowchart — 代码一键生成流程图",
+  "version": "0.2.0",
+  "description": "AI-powered code to Mermaid flowchart with themes — 代码一键生成流程图，支持主题系统",
   "keywords": [
     "mermaid",
     "flowchart",
     "code-visualization",
     "ai",
-    "tree-sitter"
+    "tree-sitter",
+    "themes",
+    "theme-system",
+    "code-to-flowchart"
   ],
   "homepage": "https://github.com/peterfei/aicode2flow",
   "repository": {
@@ -23,6 +26,9 @@
     "dist",
     "config",
     "queries",
+    "docs",
+    "examples",
+    "scripts",
     "README.md",
     "README_EN.md",
     "USAGE.md",
