@@ -133,11 +133,16 @@ aicode2flow src.py -o flow.md --theme dracula
 Perfect for dark technical documentation and developer blogs
 
 ```mermaid
-%%init: {'theme':'dark', 'themeVariables': { 'primaryColor': '#569cd6' }}
+%%init: {'theme':'dark', 'themeVariables': { 'primaryColor': '#569cd6', 'primaryTextColor': '#fff', 'primaryBorderColor': '#4a8acb', 'lineColor': '#808080', 'secondaryColor': '#4ec9b0', 'tertiaryColor': '#dcdcaa', 'background': '#1e1e1e', 'fontSize': '14px' }}
 flowchart TD
+
   main([main])
+  style main fill:#c586c0,stroke:#a969a3,stroke-width:4px,color:#fff
   loadConfig("loadConfig")
+  style loadConfig fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
   validate("validate")
+  style validate fill:#569cd6,stroke:#4a8acb,stroke-width:2px,color:#fff
+
   main --> loadConfig
   main --> validate
 ```
@@ -146,11 +151,16 @@ flowchart TD
 Popular Dracula color scheme
 
 ```mermaid
-%%init: {'theme':'base', 'themeVariables': { 'primaryColor': '#bd93f9' }}
+%%init: {'theme':'base', 'themeVariables': { 'primaryColor': '#bd93f9', 'primaryTextColor': '#282a36', 'primaryBorderColor': '#ff79c6', 'lineColor': '#6272a4', 'secondaryColor': '#8be9fd', 'tertiaryColor': '#ff79c6', 'background': '#282a36', 'fontSize': '14px' }}
 flowchart TD
+
   main([main])
+  style main fill:#ff5555,stroke:#ffb86c,stroke-width:4px,color:#282a36
   loadConfig("loadConfig")
+  style loadConfig fill:#bd93f9,stroke:#ff79c6,stroke-width:2px,color:#282a36
   validate("validate")
+  style validate fill:#bd93f9,stroke:#ff79c6,stroke-width:2px,color:#282a36
+
   main --> loadConfig
   main --> validate
 ```
@@ -159,11 +169,16 @@ flowchart TD
 Arctic blue color scheme
 
 ```mermaid
-%%init: {'theme':'base', 'themeVariables': { 'primaryColor': '#88c0d0' }}
+%%init: {'theme':'base', 'themeVariables': { 'primaryColor': '#88c0d0', 'primaryTextColor': '#2e3440', 'primaryBorderColor': '#5e81ac', 'lineColor': '#4c566a', 'secondaryColor': '#a3be8c', 'tertiaryColor': '#ebcb8b', 'background': '#eceff4', 'fontSize': '14px' }}
 flowchart TD
+
   main([main])
+  style main fill:#bf616a,stroke:#a3be8c,stroke-width:4px,color:#eceff4
   loadConfig("loadConfig")
+  style loadConfig fill:#88c0d0,stroke:#5e81ac,stroke-width:2px,color:#2e3440
   validate("validate")
+  style validate fill:#88c0d0,stroke:#5e81ac,stroke-width:2px,color:#2e3440
+
   main --> loadConfig
   main --> validate
 ```
