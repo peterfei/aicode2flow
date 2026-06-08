@@ -1,6 +1,6 @@
 # aicode2flow
 
-> **Zero-install code to Mermaid flowchart.** `npx aicode2flow file.go` — 代码一键生成流程图。
+> **Zero-install code to Mermaid flowchart.** `npx aicode2flow file.go` — Generate flowcharts from code instantly.
 
 [![npm version](https://img.shields.io/npm/v/aicode2flow)](https://www.npmjs.com/package/aicode2flow)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -76,7 +76,7 @@ def main():
 
 ```mermaid
 flowchart TD
-  main((["main"]))
+  main([main])
   greet("greet")
   validate("validate")
   process_user("process_user")
@@ -296,12 +296,12 @@ queries/                   ← Tree-sitter SCM: AST patterns (data)
   typescript.scm / rust.scm / java.scm
   c.scm / cpp.scm
 
-src/ engine/
+src/engine/
   registry.ts              — Reads JSON configs → language registry
   analyzer.ts              — Generic Tree-sitter query engine
   template.ts              — Mermaid string builder
 
-src/ cli.ts                — CLI entry point
+src/cli.ts                 — CLI entry point
 ```
 
 Adding Rust? Create `config/languages/rust.json` + `queries/rust.scm` — **zero TypeScript changes**.
