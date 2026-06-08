@@ -1,3 +1,23 @@
+# Dependencies
 node_modules
 dist
 *.tsbuildinfo
+
+# Backup files
+*.bak
+*.bak2
+*.bak3
+*.bak4
+*.tmp
+
+# IDE & Editor
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Claude Code (local settings)
+.claude/settings.local.json
+
+# OpenSpec (optional workflow)
+openspec/
